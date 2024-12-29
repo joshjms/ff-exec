@@ -76,7 +76,7 @@ func Submit(code, stdin string, memLimit, timeLimit int64) (stdout, stderr strin
 	})
 
 	if compileErr != nil {
-		return "", "", 0, 0, 0, 0, 0, 0, 0, fmt.Errorf("failed to compile: %v", compileErr)
+		return "", "", 0, 0, 0, 0, 0, 0, 0, fmt.Errorf("failed to compile")
 	}
 
 	runErr := sandbox.Run(&isolate.RunOptions{

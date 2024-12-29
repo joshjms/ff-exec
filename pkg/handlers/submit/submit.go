@@ -1,6 +1,8 @@
 package submit
 
 import (
+	"strings"
+
 	"github.com/joshjms/firefly-executor/pkg/handlers/submit/c"
 	"github.com/joshjms/firefly-executor/pkg/handlers/submit/cpp"
 	"github.com/joshjms/firefly-executor/pkg/handlers/submit/python"
@@ -52,8 +54,11 @@ func Submit(j *Job) *JobResponse {
 	}
 
 	if err != nil {
+		errMsg := strings.Split(strings.TrimSpace(err.Error()), "\n")
+		lastErr := errMsg[len(errMsg)-1]
+
 		return &JobResponse{
-			Error: err.Error(),
+			Error: lastErr,
 		}
 	}
 

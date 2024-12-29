@@ -28,7 +28,7 @@ FROM ubuntu:22.04 AS firefly
 ENV ISOLATE=/firefly/isolate/bin/isolate
 
 RUN apt-get update \
-    && apt-get install -y systemd
+    && apt-get install -y libcap2-bin acl linux-libc-dev python3 python3-pip gcc g++ make libseccomp-dev --no-install-recommends --fix-missing
 
 COPY --from=isolate /isolate/isolate /firefly/isolate/bin/
 COPY --from=isolate /usr/local/etc/isolate /usr/local/etc/
@@ -38,14 +38,6 @@ COPY --from=isolate /isolate/systemd/* /etc/systemd/system/
 COPY --from=builder /firefly/firefly /firefly/firefly
 
 WORKDIR /firefly
-
-RUN apt-get install -y libcap2-bin acl
-
-RUN apt-get install -y python3 python3-pip
-
-RUN apt-get install -y gcc g++ make
-
-RUN apt-get install -y libseccomp-dev
 
 EXPOSE 8080
 

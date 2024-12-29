@@ -17,8 +17,8 @@ func Submit(code, stdin string, memLimit, timeLimit int64) (stdout, stderr strin
 
 	os.Mkdir(filepath.Join("mounts", jobId), 0755)
 
-	defer os.RemoveAll(filepath.Join("mounts", jobId))
-	defer os.RemoveAll(filepath.Join("metadata", jobId))
+	// defer os.RemoveAll(filepath.Join("mounts", jobId))
+	// defer os.RemoveAll(filepath.Join("metadata", jobId))
 
 	boxId := controller.GetEmptyBox()
 	if boxId == -1 {
