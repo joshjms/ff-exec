@@ -7,6 +7,7 @@ import (
 	"github.com/joshjms/firefly-executor/pkg/controller"
 	"github.com/joshjms/firefly-executor/pkg/handlers/submit"
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 func main() {
@@ -16,6 +17,8 @@ func main() {
 	os.Mkdir("metadata", 0755)
 
 	e := echo.New()
+	e.Use(middleware.CORS())
+
 	e.POST("/submit", Submit)
 
 	e.Logger.Fatal(e.Start(":8080"))
@@ -31,4 +34,3 @@ func Submit(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, resp)
 }
-
